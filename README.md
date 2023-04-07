@@ -81,7 +81,7 @@ U盘引导安装：
 改为：
 
 ```
-( wget -O "$archive" "http://t.cn/R46YOzM" 2>&1 \
+( wget -O "$archive" "https://github.com/Admmmmmmin/Chromebook-For-Chinese/archive/refs/tags/latest.tar.gz" 2>&1 \
                                     || echo "Error fetching CRAS" ) | tee "$log"
 
 ```
