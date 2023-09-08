@@ -18,7 +18,7 @@ chromebook到手以后，使用Chrome os的时候需要激活，登录好谷歌�
 
 请点击 [为 Chromebook 刷写第三方操作系统](linux-on-seabios-and-coreboot.md) 。
 
-## 在 Chromebook 上安装 Ubuntu
+## 在 Chromebook 上安装 Linux （以 Kali 为例）
 
 ### 安装方法
 
@@ -27,7 +27,9 @@ chromebook到手以后，使用Chrome os的时候需要激活，登录好谷歌�
 
 **截至20230903，因相关文件缺失，Crouton 构建仍处于不可用状态（报错```sed: can't read common/cras_messages.h: no such file or dictionary```），这主要还是音频导致的问题，具体可以到 Crouton 原仓库查看相关 issue。**
 
-此时可以通过在命令前追加不使用音频的纠正，例如：```sudo CROUTON_BRANCH=silence crouton -r kali-rolling -t core,extension```来正常安装。安装完成之后不会识别本机的音频硬件，但可以识别外接设备，参见[此讨论](https://github.com/dnschneid/crouton/discussions/4969)。
+将系统版本退回至110及之前版本看来能恢复 Crouton 的可用性，未验证，但参见此 [issue](https://github.com/dnschneid/crouton/issues/4945)。
+
+可以通过在命令前追加不使用音频的纠正，例如：```sudo CROUTON_BRANCH=silence crouton -r kali-rolling -t core,extension```来正常安装。安装完成之后不会识别本机的音频硬件，但可以识别外接设备，参见[此讨论](https://github.com/dnschneid/crouton/discussions/4969)。
 
 下载官方Crouton :
 
@@ -53,7 +55,6 @@ chromebook到手以后，使用Chrome os的时候需要激活，登录好谷歌�
 ```
 ( wget -O "$archive" "https://raw.githubusercontent.com/Admmmmmmin/Chromebook-For-Chinese/master/third-party/audio/latest.tar.gz" 2>&1 \
                                     || echo "Error fetching CRAS" ) | tee "$log"
-
 ```
 
 1.3 直接运行```installer/main.sh```,或者make自己的crouton。
