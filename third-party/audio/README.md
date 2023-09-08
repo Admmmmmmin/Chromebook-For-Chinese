@@ -1,14 +1,14 @@
-Crouton声卡驱动更新记录
+Crouton 声卡驱动更新记录
 ==
 
-##说明
-由于众所周知的原因，Crouton脚本安装会卡到[声卡驱动](https://chromium.googlesource.com/chromiumos/third_party/adhd/+/master)那块。
+## 说明
+由于众所周知的原因，Crouton 脚本安装会卡到[声卡驱动](https://chromium.googlesource.com/chromiumos/third_party/adhd/+/master)那块。
 
 因此修改脚本，以适应国情。
 
 并定期维护驱动。
 
-##使用方法
+## 使用方法
 
 1.下载[Cronton](https://github.com/dnschneid/crouton)，打包下载，**Download Zip**
 
@@ -24,7 +24,7 @@ Crouton声卡驱动更新记录
 改为：
 
 ```
-( wget -O "$archive" "http://t.cn/R46YOzM" 2>&1 \
+( wget -O "$archive" "https://raw.githubusercontent.com/Admmmmmmin/Chromebook-For-Chinese/master/third-party/audio/latest.tar.gz" 2>&1 \
                                     || echo "Error fetching CRAS" ) | tee "$log"
 
 ```
@@ -41,8 +41,13 @@ folder, and run sh crouton -x to extract out the juicy scripts contained within,
 but you'll be missing build-time stuff like the Makefile.
 ```
 
-##更新记录
-20160610:
+## 更新记录
+
+更新太勤了，我跟不上，鸽了
+
+### 原仓库的旧版本：
+
+#### 20160610:
 ```
 commit	828868cb145790177903b68e229a397376e60c0c
 committer	chrome-bot <chrome-bot@chromium.org>	Thu Jun 09 02:17:42 2016
@@ -64,7 +69,7 @@ When MinPeriodFrames is defined, the value is modified within
 the device's ALSA hwparams.
 Add unit tests to cover the new configuration.
 ```
-20160330:
+#### 20160330:
 
 ```
 commit	bb0e945c6117de3725f4c1b92e277d80173a99fc
@@ -83,7 +88,7 @@ TEST=On Chell set some extreme speaker EQ values in dsp.ini, listen
 to headphone playback and confirm the speaker EQ/DRC is not applied.
 ```
 
-20160125:
+#### 20160125:
 
 ```
 commit	522d3d92f1780e126a22e7abb25c1f34cc6bb328
@@ -100,7 +105,7 @@ TEST=rstream_unittest.  Play and record audio from several streams, and
 switch devices on Samus.
 ```
 
-20160104:
+#### 20160104:
 
 ```
 commit	418181cd234babbd3deafbd50307105de743ad5e
@@ -117,7 +122,7 @@ BUG=chromium:572996
 TEST=unittest and test with mixerless type-c dock
 ```
 
-20151227:
+#### 20151227:
 
 ```
 commitId:c14268822a6ddf28247bddffda383cbb15f052bb

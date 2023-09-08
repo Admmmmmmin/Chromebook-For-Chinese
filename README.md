@@ -3,7 +3,10 @@
 
 chromebook到手以后，使用Chrome os的时候需要激活，登录好谷歌帐号，以后就可以直接登录了。
 
-激活的时候正常需要翻墙，可以使用fqrouter2等进行手机USB分享，不过fqrouter是root后的android设备使用起来更佳，应该也可以局域网中使用shadowsocks代理服务，chromebook连接同一个局域网，设置代理激活。
+~~激活的时候正常需要翻墙，可以使用fqrouter2等进行手机USB分享，不过fqrouter是root后的android设备使用起来更佳。~~ fqrouter2 早已无法使用。
+
+可以局域网中使用shadowsocks代理服务，chromebook连接同一个局域网，设置代理激活。
+
 
 ## 替换原厂固件和操作系统
 
@@ -18,6 +21,63 @@ chromebook到手以后，使用Chrome os的时候需要激活，登录好谷歌�
 ## 在 Chromebook 上安装 Ubuntu
 
 ### 安装方法
+
+
+#### [Crouton](https://github.com/dnschneid/crouton)
+
+**截至20230903，因相关文件缺失，Crouton 构建仍处于不可用状态（报错```sed: can't read common/cras_messages.h: no such file or dictionary```），这主要还是音频导致的问题，具体可以到 Crouton 原仓库查看相关 issue。**
+
+此时可以通过在命令前追加不使用音频的纠正，例如：```sudo CROUTON_BRANCH=silence crouton -r kali-rolling -t core,extension```来正常安装。安装完成之后不会识别本机的音频硬件，但可以识别外接设备，参见[此讨论](https://github.com/dnschneid/crouton/discussions/4969)。
+
+下载官方Crouton :
+
+```wget https://goo.gl/fd3zc```
+
+[Crouton 安装需要的声卡驱动](https://raw.githubusercontent.com/Admmmmmmin/Chromebook-For-Chinese/master/third-party/audio/latest.tar.gz)
+
+##### 修改声卡驱动的两种方法：
+
+1.1 下载[Crouton](https://github.com/dnschneid/crouton)，打包下载，**Download Zip**
+
+1.2 更改**targets/audio**文件:
+
+第47行：
+
+```
+( wget -O "$archive" "$urlbase/$ADHD_HEAD.tar.gz" 2>&1 \
+                                    || echo "Error fetching CRAS" ) | tee "$log"
+```
+
+改为：
+
+```
+( wget -O "$archive" "https://raw.githubusercontent.com/Admmmmmmin/Chromebook-For-Chinese/master/third-party/audio/latest.tar.gz" 2>&1 \
+                                    || echo "Error fetching CRAS" ) | tee "$log"
+
+```
+
+1.3 直接运行```installer/main.sh```,或者make自己的crouton。
+
+**或者**
+
+2.1 直接按原仓库安装方式下载 Crouton，亦即：
+  > 下载 https://goo.gl/fd3zc 处的文件后，运行以下命令：
+  > ```
+  > sudo install -Dt /usr/local/bin -m 755 ~/Downloads/crouton
+  > sudo crouton
+  > ```
+  > 此时应该可以看到相应的提示信息。
+
+2.2 将 [audio 文件](https://github.com/dnschneid/crouton/raw/master/targets/audio)保存为无后缀名的 audio 于 ```/tmp/```内的任意文件夹中，以建立 audi 文件夹为例：
+```
+sudo mkdir /tmp/audi && sudo curl -# -o /tmp/audi/audio https://raw.githubusercontent.com/dnschneid/crouton/master/targets/audio
+```
+
+2.3 修改之后利用 -T 参数指定 crouton 使用的 target 文件：
+```bash
+sudo crouton -n kali -r kali-rolling -T /tmp/audi/audio
+```
+之后 audi 文件夹可以删除。
 
 #### Chrubuntu
 
@@ -56,38 +116,6 @@ U盘引导安装：
 
 [关于使用后的U盘恢复](http://blog.csdn.net/u011538446/article/details/11590825)
 
-#### Cronton
-
-[Chromium OS Universal Chroot Environment](https://github.com/dnschneid/crouton)
-
-下载官方Cronton:
-
-```wget https://goo.gl/fd3zc```
-
-[Cronton安装需要的声卡驱动](https://raw.githubusercontent.com/dubuqingfeng/Chromebook-For-Chinese/master/third-party/audio/latest.tar.gz)
-
-##### 声卡驱动修改说明：
-1.下载[Cronton](https://github.com/dnschneid/crouton)，打包下载，**Download Zip**
-
-2.更改**targets/audio**文件:
-
-第47行：
-
-```
-( wget -O "$archive" "$urlbase/$ADHD_HEAD.tar.gz" 2>&1 \
-                                    || echo "Error fetching CRAS" ) | tee "$log"
-```
-
-改为：
-
-```
-( wget -O "$archive" "https://github.com/Admmmmmmin/Chromebook-For-Chinese/archive/refs/tags/latest.tar.gz" 2>&1 \
-                                    || echo "Error fetching CRAS" ) | tee "$log"
-
-```
-
-3.直接运行```installer/main.sh```,或者make自己的crouton。
-
 #### elementary OS
 
 [elementary OS installation script for Chromebooks](https://github.com/Setsuna666/elementaryos-chromebook)
@@ -97,7 +125,7 @@ U盘引导安装：
 ## 触摸板内核问题
 如果是刚刚装好系统，还需要先安装 sudo gcc 等软件包。
 
-```
+```bash
 $sudo pacman -S wget sudo patch make gcc
 wget http://t.cn/RA3CM2t
 bash RA3CM2t \$mykern
@@ -107,7 +135,7 @@ rm RA3CM2t
 ## 代理服务
 
 + shadowsocks-chromeapp: [Chromebook/ChromeOS安装Shadowsocks扩展教程](https://www.dogfight360.com/blog/?p=250)
-+ fqrouter2
++ ~~fqrouter2~~
 + VPN
 + SSH代理
 
