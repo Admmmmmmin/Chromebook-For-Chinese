@@ -52,14 +52,14 @@ curl -O https://goo.gl/fd3zc
 
 第47行：
 
-```
+```sh
 ( wget -O "$archive" "$urlbase/$ADHD_HEAD.tar.gz" 2>&1 \
                                     || echo "Error fetching CRAS" ) | tee "$log"
 ```
 
 改为：
 
-```
+```sh
 ( wget -O "$archive" "https://raw.githubusercontent.com/Admmmmmmin/Chromebook-For-Chinese/master/third-party/audio/latest.tar.gz" 2>&1 \
                                     || echo "Error fetching CRAS" ) | tee "$log"
 ```
@@ -100,9 +100,9 @@ sudo crouton -n kali -r kali-rolling -T /tmp/audi/audio
 3. 登录，用户名 chronos ，密码不填
 4. 输入命令：
 
-```
-	curl -L -O http://t.cn/RA3xv2I; 
-	sudo bash RA3xv2I
+```bash
+curl -L -O http://t.cn/RA3xv2I; 
+sudo bash RA3xv2I
 ```
 
 5. 根据提示选择分区大小，将硬盘重新分区，之后会自动重启一次
