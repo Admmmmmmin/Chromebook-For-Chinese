@@ -44,7 +44,7 @@ cd; rm -f flash_chromebook_rom.sh; curl -L -O https://johnlewis.ie/flash_chromeb
 
 你会看一个黑色的界面，光标不断跳动，会有 Booting from Hard Disk 的字样，就像这样：
 
-![](http://i.imgur.com/YntXS6y.jpg =500x)
+![图片](http://i.imgur.com/YntXS6y.jpg)
 
 这是因为 Seabios 尝试从硬盘引导，而它找不到可以启动的操作系统。不要慌张，可以按电源键关机。
 
